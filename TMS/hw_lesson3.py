@@ -21,15 +21,41 @@
 # "aabc" и "abc" -> True
 # "Abc" и "abc" -> False
 # "abc" и "aaa" -> False
-my_str = input('Enter first string: ')
-my_str2 = input('Enter second string: ')
-if set(my_str) == set(my_str2):
-    print(f'"{my_str}" и "{my_str2}" -> {set(my_str) == set(my_str2)}')
-else:
-    print(f'"{my_str}" и "{my_str2}" -> {set(my_str) == set(my_str2)}')
+# my_str = input('Enter first string: ')
+# my_str2 = input('Enter second string: ')
+# if set(my_str) == set(my_str2):
+#     print(f'"{my_str}" и "{my_str2}" -> {set(my_str) == set(my_str2)}')
+# else:
+#     print(f'"{my_str}" и "{my_str2}" -> {set(my_str) == set(my_str2)}')
 # 3*
 # Написать мини-игру «Камень ножницы бумага с ботом», в которой пользователь должен выбрать либо камень,
 # либо ножницы, либо бумагу. Бот делает случайный выбор (случайное число).
 # Вывести результат если, например, игрок выбрал бумагу, а бот ножницы:
 # Бот выбрал ножницы, вы проиграли!
 # Подсказка: я не показывала, как в Pyhon получить случайное число, попробуйте найти это сами
+import random as r
+
+answer = input('Enter once answer (Камень или Ножницы или Бумага) ')
+answers = ['Камень', 'Ножницы', 'Бумага']
+# Запускаю в цикле для генерации различных варианто для проверки
+for i in range(20):
+    # 1-ый вариант получение случайного ответа
+    # Выбираю случайное значение из списка используя метод choice
+    answer_bot = r.choice(answers)
+    # 2- ой вариант получения случайного ответа по индексу
+    # Выбираю случайное значение по индексу  , индекс генерируется из диапозона чисел от 0 до длинны строки,
+    # последняя цифра в отборе не участвуе
+    #answer_bot = answers[r.randrange(len(answers))]
+    # 3- ий вариант получение случайного ответа по индексу
+    # Выбираем случайное значение по индексу, индекс генерируется из диапозона чисел от 0 до длинны строки,
+    # т.к randint генерирует случайные цифры включая ту которая задана во втором аргументе, чтобы небыло ошибки
+    # выхода за пределы списка необходимо от длинны строки отнять единицу
+    #answer_bot = answers[r.randint(0, len(answers) - 1)]
+    #print(answer_bot)
+    if answer == answer_bot:
+        print(f'Бот выбрал {answer} и вы выбрали {answer_bot}, ничья!')
+    elif (answer == 'Бумага' and answer_bot == 'Ножницы') or (answer == 'Ножницы' and answer_bot == 'Камень')\
+            or (answer == 'Камень' and answer_bot == 'Бумага'):
+        print((f'Бот выбрал {answer_bot}, вы проиграли!'))
+    else:
+        print((f'Бот выбрал {answer_bot}, вы победили!'))
