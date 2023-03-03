@@ -56,23 +56,25 @@
 # Сделать программу, в которой нужно будет угадывать число
 # Программа O(log n) - при введенной не правильной попытке мы даем подсказку в какой из двух половин находиться
 # заявленное число, тем самым уменьшаем вероятность худшего сценария на 2
-import random
-find_range = input('Enter 2 number for range: ').split()
-answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
-number = random.randint(int(find_range[0]), int(find_range[1]))
-while True:
-    if (int(find_range[0]) > answer_int) or (answer_int > int(find_range[1])):
-        print(f'Number {answer_int} out of range {find_range[0]} - {find_range[1]}')
-        break
-    if answer_int == number:
-        print('You win')
-        break
-    elif answer_int != number and number <= int(find_range[1]) // 2:
-        print('You lose. Number in first hulf:')
-        answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
-    elif answer_int != number and number > int(find_range[1]) // 2:
-        print('You lose. Number in second hulf:')
-        answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
+#---------------------------
+# import random
+# find_range = input('Enter 2 number for range: ').split()
+# answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
+# number = random.randint(int(find_range[0]), int(find_range[1]))
+# while True:
+#     if (int(find_range[0]) > answer_int) or (answer_int > int(find_range[1])):
+#         print(f'Number {answer_int} out of range {find_range[0]} - {find_range[1]}')
+#         break
+#     if answer_int == number:
+#         print('You win')
+#         break
+#     elif answer_int != number and number <= int(find_range[1]) // 2:
+#         print('You lose. Number in first hulf:')
+#         answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
+#     elif answer_int != number and number > int(find_range[1]) // 2:
+#         print('You lose. Number in second hulf:')
+#         answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
+#----------------------------
 # 4*
 # Ввести строку (считаем, что в начале и в конце строки нет пробелов,
 # все слова в строке разделены одним пробелом). Для введенной строки
@@ -81,3 +83,13 @@ while True:
 # Примеры:
 # "Hello World!" -> "olleH !dlroW"
 # "Let's see, how it works" -> "s'teL ,ees woh ti skrow"
+
+# Алгоритм О(n) - чем длиенее строка тем боле получиться элементов списка и тем больше раз придеться запускать цикл for
+string_list = input('Enter string: ').split()
+print(string_list)
+for element in string_list:
+    # вариант испольуя срезы
+    print(element[::-1], end=' ')
+    # # вариант с использованием функции reversed
+    # print(*reversed(element), sep='', end=' ')
+
