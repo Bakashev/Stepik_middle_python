@@ -28,34 +28,51 @@
 # Сделать 2 отступа (используя аргументы функции print)
 # и затем обе переменные вывести одной функцией print, разделяя их между собой пятью
 # пробелами и закончить вывод переводом строки и тремя восклицательными знаками.
-default_str = input('Enter default string: ')
-even_str = ''
-odd_str = ''
+#----------------------------
+# default_str = input('Enter default string: ')
+# even_str = ''
+# odd_str = ''
 #------------------
 # Заполнение строковой переменной с использованием среза строки и заданным шагом
 # сложность алгоритма O(n) n - зависит от длинны строки. Для выполнения обоих условий нам придется вывести сначала
 # четные элементы, а затем не четные по итогу для получения обоих результатов придеться пройти всю строку
-#
+#----------------
 # even_str += default_str[::2]
 # odd_str += default_str[1::2]
 #------------------
 # Заполнение строковых переменных с использованием цикла for
 # сложность алгоритма O(n) - т.к в зависимости от длинны входной строки нам придется циклом пройти от начала
 # до конца определяя индекс каждого символа
-for index_, symbol in enumerate(default_str):
-    if index_ % 2 == 0:
-        even_str += default_str[index_]
-    else:
-        odd_str += default_str[index_]
-print(f'Введена строка: {default_str.strip()}', '  ', end='')
-print(f'{even_str.strip()}     {odd_str.strip()}', end='\n!!!')
-
-
-
-
+#-----------------------------------
+# for index_, symbol in enumerate(default_str):
+#     if index_ % 2 == 0:
+#         even_str += default_str[index_]
+#     else:
+#         odd_str += default_str[index_]
+# print(f'Введена строка: {default_str.strip()}', '  ', end='')
+# print(f'{even_str.strip()}     {odd_str.strip()}', end='\n!!!')
+#-------------------------------------
 # 3*
 # Сделать программу, в которой нужно будет угадывать число
-
+# Программа O(log n) - при введенной не правильной попытке мы даем подсказку в какой из двух половин находиться
+# заявленное число, тем самым уменьшаем вероятность худшего сценария на 2
+import random
+find_range = input('Enter 2 number for range: ').split()
+answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
+number = random.randint(int(find_range[0]), int(find_range[1]))
+while True:
+    if (int(find_range[0]) > answer_int) or (answer_int > int(find_range[1])):
+        print(f'Number {answer_int} out of range {find_range[0]} - {find_range[1]}')
+        break
+    if answer_int == number:
+        print('You win')
+        break
+    elif answer_int != number and number <= int(find_range[1]) // 2:
+        print('You lose. Number in first hulf:')
+        answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
+    elif answer_int != number and number > int(find_range[1]) // 2:
+        print('You lose. Number in second hulf:')
+        answer_int = int(input(f'Please enter number {find_range[0]} - {find_range[1]} '))
 # 4*
 # Ввести строку (считаем, что в начале и в конце строки нет пробелов,
 # все слова в строке разделены одним пробелом). Для введенной строки
