@@ -85,9 +85,9 @@
 # "Let's see, how it works" -> "s'teL ,ees woh ti skrow"
 
 # Алгоритм О(n) - чем длиенее строка тем боле получиться элементов списка и тем больше раз придеться запускать цикл for
-string_list = input('Enter string: ').split()
-print(string_list)
-for element in string_list:
+list_string = input('Enter string: ').split()
+#print(list_string)
+for element in list_string:
     # вариант испольуя срезы
     print(element[::-1], end=' ')
     # # вариант с использованием функции reversed
