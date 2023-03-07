@@ -39,7 +39,7 @@ def print_number(arg: str) -> None:
             elif control_even(str(element)):
                 print(element ** 2, end=' ')
             else:
-                print(element, end= ' ')
+                print(element, end=' ')
     else:
         print('Введенные данные не являются числом')
 
