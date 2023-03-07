@@ -31,9 +31,7 @@ answer = input('Enter number: ')
 
 def print_number(arg: str) -> None:
     if arg.isdigit():
-
         for element in range(int(arg)):         #O(n)
-
             if element % 7 == 0 and element % 4 == 0 and element != 0:
                 break
             elif control_even(str(element)):
