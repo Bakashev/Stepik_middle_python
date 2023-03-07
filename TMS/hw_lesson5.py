@@ -14,7 +14,7 @@ def control_even(arg: str) -> bool:
         else:
             return False
     else:
-        err = 'Введенные данные не являются числом'
+        err = 'Введенные данные не являются целым числом'
         return err
 
 
@@ -39,7 +39,7 @@ def print_number(arg: str) -> None:
             else:
                 print(element, end=' ')
     else:
-        print('Введенные данные не являются числом')
+        print('Введенные данные не являются целым числом')
 
 
 print_number(answer)
