@@ -87,21 +87,27 @@ def decorate_fibonachi(func: Callable) -> Callable:
     :param func:
     :return:
     """
-    @ wraps(func)
+
+
+
+
+    @wraps(func)
     def func_factorial(num):
         start = datetime.now()
         if num < 0:
             print(f'Число {num} отрицательное, хотите рассчитать фаткориал отрицального числа y\\n')
             answer = input()
             if answer == 'y':
-                print(f'Время выполнения {datetime.now() - start}')
-                return '-' + str(func(abs(num)))
+                res = '-' + str(func(abs(num)))
+                print(f'Время выполнения9 {datetime.now() - start}')
+                return res
             else:
                 return 0
 
         else:
-            #print(f'Время выполнения {datetime.now() - start}')
-            return func(num)
+            res = func(num)
+            return res
+
     return func_factorial
 
 @decorate_fibonachi
@@ -117,7 +123,7 @@ def fibonachi_(num: int) -> int:
         return fibonachi_(num-2) + fibonachi_(num-1)
 
 
-print(fibonachi_(-20))
+print(fibonachi_(-50))
 
 
 # Задача 5. Сделать  функцию которая  на вход принимает строку. Анализирует ее исключительно методом isdigit()
