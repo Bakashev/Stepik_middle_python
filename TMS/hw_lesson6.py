@@ -123,7 +123,7 @@ def fibonachi_(num: int) -> int:
         return fibonachi_(num-2) + fibonachi_(num-1)
 
 
-print(fibonachi_(-50))
+print(fibonachi_(-30))
 
 
 # Задача 5. Сделать  функцию которая  на вход принимает строку. Анализирует ее исключительно методом isdigit()
