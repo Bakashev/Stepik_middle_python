@@ -179,6 +179,6 @@ def transformation_str_to_int_float(number: str) -> None:
 number = input('Enter number: ')
 
 transformation_str_to_int_float(number)
-#transformation_str_to_int_float()
+
 
 
