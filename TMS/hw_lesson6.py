@@ -126,59 +126,121 @@
 # print(fibonachi_(-30))
 
 
-# Задача 5. Сделать  функцию которая  на вход принимает строку. Анализирует ее исключительно методом isdigit()
-# и переводит строку в число. Функция умеет распозновать отрицательные числа и  десятичные дроби.
-# 6.7 - Вы ввели отрицательное дробное число: -6.7
-# 5 - Вы ввели положительное целое число: 5
-# 5.4r - Вы ввели не корректное число: 5.4r
-#-.777 - Вы ввели отрицательное дробное число: -0.777
+# # Задача 5. Сделать  функцию которая  на вход принимает строку. Анализирует ее исключительно методом isdigit()
+# # и переводит строку в число. Функция умеет распозновать отрицательные числа и  десятичные дроби.
+# # 6.7 - Вы ввели отрицательное дробное число: -6.7
+# # 5 - Вы ввели положительное целое число: 5
+# # 5.4r - Вы ввели не корректное число: 5.4r
+# #-.777 - Вы ввели отрицательное дробное число: -0.777
+#
+#
+# def transformation_str_to_int_float(number: str) -> None:
+#     """
+#     Функция принимает строку и преоброзовывает ее в число. Функция умеет распозновать отрицательные числа
+#     и  десятичные дроби.
+#     :param number: дробное или целое положительно или отрицательно число
+#     :return: None
+#     """
+#     if number.isdigit():
+#         print(f'{number} - Вы ввели положительное целое число: {int(number)}')
+#     elif number[1:].isdigit() and number[0] == '-':
+#         print(f'{number} - Вы ввели отрицательное целое число: {int(number)}')
+#     elif not number.isdigit() and number[0] != '-':
+#         count_point = 0
+#         flag = True
+#         for symbol in number:
+#             if symbol.isdigit():
+#                 continue
+#             elif symbol == '.':
+#                 count_point += 1
+#             elif not symbol.isdigit():
+#                 print(f'{number} - Вы ввели не корректное число: {number}')
+#                 flag = False
+#         if flag and count_point == 1:
+#             print(f'{number} - Вы ввели положительное дробное число: {float(number)}')
+#         else:
+#             print(f'{number} - Вы ввели не корректное число: {number}')
+#     elif not number[1:].isdigit() and number[0] == '-':
+#         count_point = 0
+#         flag = True
+#         for symbol in number[1:]:
+#             if symbol.isdigit():
+#                 continue
+#             elif symbol == '.' and count_point == 0:
+#                 count_point += 1
+#             elif not symbol.isdigit():
+#                 flag = False
+#         if flag and count_point == 1:
+#             print(f'{number} - Вы ввели отрицательно дробное число: {float(number)}')
+#         else:
+#             print(f'{number} - Вы ввели не корректное число: {number}')
+#
+#
+# number = input('Enter number: ')
+# transformation_str_to_int_float(number)
+
+# Задание 4 Написать декоратор к 2-м любым фунциям, которые бы считали и выводили время их выполнения
+
+#-------------------------первая реализация декоратора
+import typing
+from datetime import datetime
+from functools import wraps
 
 
-def transformation_str_to_int_float(number: str) -> None:
+def decorate_sum(func: typing.Callable) -> typing.Callable:
     """
-    Функция принимает строку и преоброзовывает ее в число. Функция умеет распозновать отрицательные числа
-    и  десятичные дроби.
-    :param number: дробное или целое положительно или отрицательно число
-    :return: None
+    Декоратор к функции cost_tovar, доавляет к сумме веденный пользователем процент надбавки
+    :param func:
+    :return:
     """
-    if number.isdigit():
-        print(f'{number} - Вы ввели положительное целое число: {int(number)}')
-    elif number[1:].isdigit() and number[0] == '-':
-        print(f'{number} - Вы ввели отрицательное целое число: {int(number)}')
-    elif not number.isdigit() and number[0] != '-':
-        count_point = 0
-        flag = True
-        for symbol in number:
-            if symbol.isdigit():
-                continue
-            elif symbol == '.':
-                count_point += 1
-            elif not symbol.isdigit():
-                print(f'{number} - Вы ввели не корректное число: {number}')
-                flag = False
-        if flag and count_point == 1:
-            print(f'{number} - Вы ввели положительное дробное число: {float(number)}')
+    @ wraps(func)
+    def cost_product_nds(*args, **kwargs):
+
+        nds = input('Enter percent: ')
+        if nds:
+            nds = int(nds)
+            sum_ = func(*args, **kwargs)
+            if sum_ != 0:
+                print(f'Сумма товара {kwargs["name"]} c добавкой {nds} = {sum_ + (sum_ * (nds / 100))}')
+            else:
+                print('Нет данных для оброботки')
         else:
-            print(f'{number} - Вы ввели не корректное число: {number}')
-    elif not number[1:].isdigit() and number[0] == '-':
-        count_point = 0
-        flag = True
-        for symbol in number[1:]:
-            if symbol.isdigit():
-                continue
-            elif symbol == '.' and count_point == 0:
-                count_point += 1
-            elif not symbol.isdigit():
-                flag = False
-        if flag and count_point == 1:
-            print(f'{number} - Вы ввели отрицательно дробное число: {float(number)}')
-        else:
-            print(f'{number} - Вы ввели не корректное число: {number}')
+            print('Нет данных для оброботки')
+    return cost_product_nds
 
 
-number = input('Enter number: ')
+def decorate_time(func: typing.Callable) -> typing.Callable:
+    @wraps(func)
+    def time(*args, **kwargs):
+        start = datetime.now()
+        func(*args, **kwargs)
+        print(f'Время выполнения: {datetime.now() - start}')
+    return time
 
-transformation_str_to_int_float(number)
+@decorate_time
+@decorate_sum
+def cost_product(*args, **kwargs) -> int:
+    """
+    Выводим количество умонженное на цену
+
+    :param kwargs: именнованные параметры name, kol, price
+    :return: kol * price
+    """
+    if 'kol' not in kwargs or 'price' not in kwargs:
+        return 0
+    else:
+        for key, value in kwargs.items():
+            if key == 'price':
+                price = value
+            elif key == 'kol':
+                kol = value
+        return kol * price
+
+
+cost_product(name='note', kol=2, price=120)
+print(cost_product.__doc__)
+cost_product(1, 2, 3, 4)
+cost_product()
 
 
 
