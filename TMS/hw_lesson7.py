@@ -10,6 +10,8 @@
 import datetime
 import  typing
 from functools import wraps
+
+
 def decorated(func: typing.Callable) -> typing.Callable:
     @wraps(func)
     def inner(*args, **kwargs):
@@ -28,10 +30,12 @@ def decorated(func: typing.Callable) -> typing.Callable:
             return func(*args)
     return inner
 
+
 @decorated
 def add(*args, **kwargs):
     print(args, kwargs)
     return
+
 
 add(2, 3, 4, b=0, c=9)
 add(2, 3)
