@@ -241,6 +241,7 @@ cost_product(name='note', kol=2, price=120)
 print(cost_product.__doc__)
 cost_product(1, 2, 3, 4)
 cost_product()
+#
 
 
 
