@@ -182,66 +182,66 @@
 # Задание 4 Написать декоратор к 2-м любым фунциям, которые бы считали и выводили время их выполнения
 
 #-------------------------первая реализация декоратора
-import typing
-from datetime import datetime
-from functools import wraps
-
-
-def decorate_sum(func: typing.Callable) -> typing.Callable:
-    """
-    Декоратор к функции cost_tovar, доавляет к сумме веденный пользователем процент надбавки
-    :param func:
-    :return:
-    """
-    @ wraps(func)
-    def cost_product_nds(*args, **kwargs):
-
-        nds = input('Enter percent: ')
-        if nds:
-            nds = int(nds)
-            sum_ = func(*args, **kwargs)
-            if sum_ != 0:
-                print(f'Сумма товара {kwargs["name"]} c добавкой {nds} = {sum_ + (sum_ * (nds / 100))}')
-            else:
-                print('Нет данных для оброботки')
-        else:
-            print('Нет данных для оброботки')
-    return cost_product_nds
-
-
-def decorate_time(func: typing.Callable) -> typing.Callable:
-    @wraps(func)
-    def time(*args, **kwargs):
-        start = datetime.now()
-        func(*args, **kwargs)
-        print(f'Время выполнения: {datetime.now() - start}')
-    return time
-
-@decorate_time
-@decorate_sum
-def cost_product(*args, **kwargs) -> int:
-    """
-    Выводим количество умонженное на цену
-
-    :param kwargs: именнованные параметры name, kol, price
-    :return: kol * price
-    """
-    if 'kol' not in kwargs or 'price' not in kwargs:
-        return 0
-    else:
-        for key, value in kwargs.items():
-            if key == 'price':
-                price = value
-            elif key == 'kol':
-                kol = value
-        return kol * price
-
-
-cost_product(name='note', kol=2, price=120)
-print(cost_product.__doc__)
-cost_product(1, 2, 3, 4)
-cost_product()
+# import typing
+# from datetime import datetime
+# from functools import wraps
 #
+#
+# def decorate_sum(func: typing.Callable) -> typing.Callable:
+#     """
+#     Декоратор к функции cost_tovar, доавляет к сумме веденный пользователем процент надбавки
+#     :param func:
+#     :return:
+#     """
+#     @ wraps(func)
+#     def cost_product_nds(*args, **kwargs):
+#
+#         nds = input('Enter percent: ')
+#         if nds:
+#             nds = int(nds)
+#             sum_ = func(*args, **kwargs)
+#             if sum_ != 0:
+#                 print(f'Сумма товара {kwargs["name"]} c добавкой {nds} = {sum_ + (sum_ * (nds / 100))}')
+#             else:
+#                 print('Нет данных для оброботки')
+#         else:
+#             print('Нет данных для оброботки')
+#     return cost_product_nds
+#
+#
+# def decorate_time(func: typing.Callable) -> typing.Callable:
+#     @wraps(func)
+#     def time(*args, **kwargs):
+#         start = datetime.now()
+#         func(*args, **kwargs)
+#         print(f'Время выполнения: {datetime.now() - start}')
+#     return time
+#
+# @decorate_time
+# @decorate_sum
+# def cost_product(*args, **kwargs) -> int:
+#     """
+#     Выводим количество умонженное на цену
+#
+#     :param kwargs: именнованные параметры name, kol, price
+#     :return: kol * price
+#     """
+#     if 'kol' not in kwargs or 'price' not in kwargs:
+#         return 0
+#     else:
+#         for key, value in kwargs.items():
+#             if key == 'price':
+#                 price = value
+#             elif key == 'kol':
+#                 kol = value
+#         return kol * price
+#
+#
+# cost_product(name='note', kol=2, price=120)
+# print(cost_product.__doc__)
+# cost_product(1, 2, 3, 4)
+# cost_product()
+
 
 
 
