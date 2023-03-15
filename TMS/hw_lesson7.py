@@ -15,17 +15,17 @@ from functools import wraps
 def decorated(func: typing.Callable) -> typing.Callable:
     @wraps(func)
     def inner(*args, **kwargs):
-        if len(args) == 0 and len(kwargs) == 0:
+        if not args and not kwargs:
             print(f'Функция {func.__name__} вызвана в {datetime.datetime.now()} без параметров')
             return func()
-        if len(args) == 0 and len(kwargs) > 0:
+        if not args and kwargs:
             print(f'Функция {func.__name__} вызвана в {datetime.datetime.now()} с именнованными параметрами {kwargs}')
             return func(*kwargs)
-        if len(args) > 0  and len(kwargs) > 0:
+        if args  and kwargs:
             print(f'Функция {func.__name__} вызвана в {datetime.datetime.now()} с позиционными параметрами {args}'
                   f' и с именнованными параметрами {kwargs}')
             return func(*args, **kwargs)
-        if len(args) > 0 and len(kwargs) == 0:
+        if args and not kwargs:
             print(f'Функция {func.__name__} вызвана в {datetime.datetime.now()} с позиционными параметрами {args}')
             return func(*args)
     return inner
