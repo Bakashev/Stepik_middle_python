@@ -17,17 +17,14 @@ def decorated(func: typing.Callable) -> typing.Callable:
     def inner(*args, **kwargs):
         if not args and not kwargs:
             print(f'Функция {func.__name__} вызвана в {datetime.datetime.now()} без параметров')
-            return func()
-        if not args and kwargs:
+        elif not args and kwargs:
             print(f'Функция {func.__name__} вызвана в {datetime.datetime.now()} с именнованными параметрами {kwargs}')
-            return func(*kwargs)
-        if args  and kwargs:
+        elif args  and kwargs:
             print(f'Функция {func.__name__} вызвана в {datetime.datetime.now()} с позиционными параметрами {args}'
                   f' и с именнованными параметрами {kwargs}')
-            return func(*args, **kwargs)
-        if args and not kwargs:
+        else:# args and not kwargs:
             print(f'Функция {func.__name__} вызвана в {datetime.datetime.now()} с позиционными параметрами {args}')
-            return func(*args)
+        return func(*args, **kwargs)
     return inner
 
 
