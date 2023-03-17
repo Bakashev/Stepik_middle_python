@@ -41,3 +41,20 @@ dict_for_json= {226238: ('Sergey', 23), 801950: ('Andrey', 14), 640235: ('vova',
 
 with open(file_name, 'w', encoding='utf-8') as file:
     json.dump(dict_for_json, file, indent=4)
+
+# прочитать сохраненный json-файл и записать данные на диск в csv-файл, первой строкой котороой озоглавить каждый
+# столбец и добавить новый столбец телефон
+
+import csv
+import json
+import random
+
+with open('people.json') as file:
+    people_info = json.load(file)
+    file_name_csv = 'people_and_phone.csv'
+    with open(file_name_csv, 'w', encoding='utf-8', newline='') as file_csv:
+        header = ['id', 'name', 'age', 'phone']
+        writer = csv.writer(file_csv)
+        writer.writerow(header)
+        for key, element in people_info.items():
+            writer.writerow([f'{key},{element[0]},{element[1]}, +37544{random.randint(1000000,9999999)}'])
