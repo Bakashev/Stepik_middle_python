@@ -28,3 +28,16 @@ with open(file_name, 'w', encoding='utf-8') as file:
 with open(file_name, 'a', encoding='utf-8') as file:
     file.write(third_str)
     file.write(four_str)
+
+# Задание 3. Создаьть словать в качестве ключа которого будет 6-ти значное число (id), а качестве значения кортеж
+# состоящий из двух 2-ух эллементов - имя (str), возраст(int). Сделать около 5-6 элементов словаря. Записать данный
+# словарь на диск в json файл
+
+
+import json
+file_name = 'people.json'
+dict_for_json= {226238: ('Sergey', 23), 801950: ('Andrey', 14), 640235: ('vova', 19),
+                 478654: ('Pavel', 39), 666082: ('Stas', 45), 952364: ('Stepan', 60)}
+
+with open(file_name, 'w', encoding='utf-8') as file:
+    json.dump(dict_for_json, file, indent=4)
