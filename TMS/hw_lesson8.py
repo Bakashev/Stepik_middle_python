@@ -1,3 +1,7 @@
+import csv
+import json
+import random
+
 # # Задача 1. Декодировать в строку байтовое значение b'r\xc3\xa9sum\xc3\xa9'. Затем результат преоброзовать в байтовый
 # #  вид в кодировке 'Latin1' и затем результат снова декодировать в строку (рузультаты всех преоброзований выводить
 # #  на экран)
@@ -34,7 +38,7 @@ with open(file_name, 'a', encoding='utf-8') as file:
 # словарь на диск в json файл
 
 
-import json
+
 file_name = 'people.json'
 dict_for_json= {226238: ('Sergey', 23), 801950: ('Andrey', 14), 640235: ('vova', 19),
                  478654: ('Pavel', 39), 666082: ('Stas', 45), 952364: ('Stepan', 60)}
@@ -45,9 +49,7 @@ with open(file_name, 'w', encoding='utf-8') as file:
 # прочитать сохраненный json-файл и записать данные на диск в csv-файл, первой строкой котороой озоглавить каждый
 # столбец и добавить новый столбец телефон
 
-import csv
-import json
-import random
+
 
 with open('people.json') as file:
     people_info = json.load(file)
