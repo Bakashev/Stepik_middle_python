@@ -59,4 +59,4 @@ with open('people.json') as file:
         writer = csv.writer(file_csv)
         writer.writerow(header)
         for key, element in people_info.items():
-            writer.writerow([f'{key},{element[0]},{element[1]}, +37544{random.randint(1000000,9999999)}'])
+            writer.writerow([key, element[0], element[1], f'+37544{random.randint(1000000,9999999)}'])
