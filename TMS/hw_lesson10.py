@@ -108,6 +108,7 @@ class PhoneBook:
     with open(file_name, encoding='utf') as file:
         my_contact = json.load(file)
     print(my_contact)
+    print('---------------------')
     def __init__(self):
         pass
 
@@ -124,7 +125,7 @@ class PhoneBook:
 
     def serch_phone(self, phone: str) -> list:
         self.phone = phone
-
+        return list(filter(lambda x: self.phone in x['phone'],PhoneBook.my_contact))
 
 
 
@@ -132,6 +133,8 @@ class PhoneBook:
 
 contact = PhoneBook()
 print(contact.search_name('Ser'))
+print('--------------------')
+print(contact.serch_phone('+1'))
 # file_name = 'my_contact'
 # dict_contact = {
 #                 'name': 'Andrey',
