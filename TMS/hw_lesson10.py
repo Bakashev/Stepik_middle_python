@@ -122,7 +122,20 @@ class PhoneBook:
         self.phone = phone
         return list(filter(lambda x: self.phone in x['phone'], PhoneBook.my_contact))
 
+class Contact(PhoneBook):
+    def __init__(self):
+        pass
 
+
+    def add_new_contat(self,firstname, phone):
+        super().__init__()
+        self.firstname = firstname
+        self.phone = phone
+        if not all(list(filter(lambda x: self.phone in x['phone'] and self.firstname in x['name'], PhoneBook.my_contact))):
+            new_contact = {'name': self.firstname, 'phone': self.phone}
+            PhoneBook.my_contact.append(new_contact)
+            with open(PhoneBook.file_name, 'w', encoding='utf-8') as file:
+                json.dump(PhoneBook.my_contact, file, indent=4)
 
 
 
@@ -130,6 +143,11 @@ contact = PhoneBook()
 print(contact.search_name('Ser'))
 print('--------------------')
 print(contact.serch_phone('+1'))
+print('-------------------')
+contact1 = Contact()
+contact1.add_new_contat('Lesha', '+321412141241')
+
+print(PhoneBook.my_contact)
 # file_name = 'my_contact'
 # dict_contact = {
 #                 'name': 'Andrey',
