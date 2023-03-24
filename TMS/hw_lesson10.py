@@ -122,6 +122,12 @@ class PhoneBook:
         self.phone = phone
         return list(filter(lambda x: self.phone in x['phone'], PhoneBook.my_contact))
 
+
+    def write_json(self):
+        with open(PhoneBook.file_name, 'w', encoding='utf-8') as file:
+            json.dump(PhoneBook.my_contact, file, indent=4)
+
+
 class Contact(PhoneBook):
     def __init__(self):
         pass
@@ -134,12 +140,20 @@ class Contact(PhoneBook):
                             PhoneBook.my_contact))):
             new_contact = {'name': self.firstname, 'phone': self.phone}
             PhoneBook.my_contact.append(new_contact)
-            with open(PhoneBook.file_name, 'w', encoding='utf-8') as file:
-                json.dump(PhoneBook.my_contact, file, indent=4)
+            super().write_json()
 
 
-    def del_contact_by_name(self, firstname):
+    def del_contact(self, firstname=None, phone=None) -> None:
         self.firstname = firstname
+        self.phone = phone
+        for index, value in enumerate(PhoneBook.my_contact):
+            if self.firstname == value['name'] or self.phone == value['phone']:
+                answer = input(f'Удалить текущий контакт {value} y/n: ')
+                if answer == 'y':
+                    PhoneBook.my_contact.pop(index)
+                print(1)
+            print(2)
+        super().write_json()
 
 
 
@@ -150,17 +164,7 @@ print(contact.serch_phone('+1'))
 print('-------------------')
 contact1 = Contact()
 contact1.add_new_contat('Lesha1', '+3214121412411')
-
+contact1.del_contact('Lesha13', '+321412141241')
 print(PhoneBook.my_contact)
-# file_name = 'my_contact'
-# dict_contact = {
-#                 'name': 'Andrey',
-#                 'phone': '+121782648'
-#                 }
-# dict_contact2 = {
-#                 'name': 'Sergey',
-#                 'phone': '+1239482348'
-#                 }
-# phone_book = [dict_contact, dict_contact2]
-# with open(file_name, 'w', encoding='utf-8') as file:
-#     json.dump(phone_book, file, indent=4)
+
+
