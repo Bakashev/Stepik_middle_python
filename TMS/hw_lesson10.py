@@ -129,8 +129,6 @@ class PhoneBook:
 
 
 class Contact(PhoneBook):
-    def __init__(self):
-        pass
 
 
     def add_new_contat(self, firstname, phone):
@@ -143,7 +141,7 @@ class Contact(PhoneBook):
             super().write_json()
 
 
-    def del_contact(self, firstname=None, phone=None) -> None:
+    def del_contact(self, firstname='', phone='') -> None:
         self.firstname = firstname
         self.phone = phone
         for index, value in enumerate(PhoneBook.my_contact):
@@ -151,20 +149,21 @@ class Contact(PhoneBook):
                 answer = input(f'Удалить текущий контакт {value} y/n: ')
                 if answer == 'y':
                     PhoneBook.my_contact.pop(index)
-                print(1)
-            print(2)
-        super().write_json()
+            super().write_json()
 
 
 
 contact = PhoneBook()
-print(contact.search_name('Serg'))
+name = input('Enter name for search: ')
+print(contact.search_name(name))
 print('--------------------')
-print(contact.serch_phone('+1'))
+phone = input('Enter phone for search: ')
+print(contact.serch_phone(phone))
 print('-------------------')
 contact1 = Contact()
 contact1.add_new_contat('Lesha1', '+3214121412411')
-contact1.del_contact('Lesha13', '+321412141241')
+contact1.del_contact(phone='+3214121412411')
+contact1.del_contact(firstname='Serhei')
 print(PhoneBook.my_contact)
 
 
