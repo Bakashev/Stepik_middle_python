@@ -103,8 +103,9 @@ import time
 # добавлять новые контакты и удалять контакты по имени или телефону. Контакты реализовать
 # в виде объектов класса Контакт. Данные телефонной книги хранить в json файле.
 
+
 class PhoneBook:
-    file_name = 'my_contact'
+    file_name = 'my_contact.json'
     with open(file_name, encoding='utf') as file:
         my_contact = json.load(file)
     print(my_contact)
