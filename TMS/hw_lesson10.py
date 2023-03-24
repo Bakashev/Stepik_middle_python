@@ -115,17 +115,12 @@ class PhoneBook:
 
     def search_name(self, firstname: str) -> list:
         self.firstname = firstname
-        result = []
-
-        for dict_ in PhoneBook.my_contact:
-            if firstname in dict_['name']:
-                result.append(dict_)
-        return result
+        return list(filter(lambda x: self.firstname in x['name'], PhoneBook.my_contact))
 
 
     def serch_phone(self, phone: str) -> list:
         self.phone = phone
-        return list(filter(lambda x: self.phone in x['phone'],PhoneBook.my_contact))
+        return list(filter(lambda x: self.phone in x['phone'], PhoneBook.my_contact))
 
 
 
