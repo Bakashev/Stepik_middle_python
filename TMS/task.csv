@@ -1,0 +1,4 @@
+name_task,task,prority
+first,first task,PrioritetEnum.HIGH
+first2,first task,PrioritetEnum.MEDIUM
+first3,edit task,PrioritetEnum.HIGH
