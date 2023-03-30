@@ -7,11 +7,11 @@ import json
 file_name_start = 'my_contact.json'
 
 class PhoneBook:
-    def __init__(self, file_name: str, firstname: str, phone: str):
+    def __init__(self, file_name: str):
         self.file_name = file_name
         self.my_contact = []
-        with open(file_name, 'w', encoding='utf-8') as file:
-            json.dump(self.my_contact, file)
+        with open(file_name, 'r', encoding='utf-8') as file:
+            json.load(file)
             #self.my_contact = json.load(file)
             #print(self.my_contact)
     print('---------------------')
@@ -60,7 +60,7 @@ class Contact:
 
 contact1 = Contact('Stephan', '+2342352352')
 #contact = PhoneBook('new_phone_book.json', 'Angelina', '+987456321')
-contact = PhoneBook(file_name_start, 'Angelina', '+987456321')
+contact = PhoneBook(file_name_start)
 contact.add_new_contat(contact1.firstname, contact1.phone)
 name = input('Enter name for search: ')
 print(contact.search_name(name))
